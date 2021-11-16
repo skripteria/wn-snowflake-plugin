@@ -1,0 +1,20 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    type:
+        label: Type
+        type: relation
+        nameFrom: name
+        span: left
+        readOnly: true
+    cms_key:
+        label: CMS Key
+        type: text
+        span: left
+        readOnly: true
+    desc:
+        label: Description
+        type: text
+        span: full

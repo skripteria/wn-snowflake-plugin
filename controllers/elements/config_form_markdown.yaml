@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Element
+
+# Model Form Field configuration
+form: $/skripteria/snowflake/models/element/fields_markdown.yaml
+
+# Model Class name
+modelClass: Skripteria\Snowflake\Models\Element
+
+# Default redirect location
+defaultRedirect: skripteria/snowflake/elements
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: skripteria/snowflake/elements/update/:id
+    redirectClose: skripteria/snowflake/elements
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: skripteria/snowflake/elements
+    redirectClose: skripteria/snowflake/elements
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

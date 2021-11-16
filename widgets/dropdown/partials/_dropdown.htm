@@ -1,0 +1,40 @@
+<div id="<?= $this->getId() ?>" data-control="toolbar">
+  <?php if (count($items) == 0): ?>
+    <div class="callout fade in callout-success">
+        <div class="content">
+            <p><?=  e(trans('skripteria.snowflake::lang.list.error_no_page')) ?></p>
+        </div>
+    </div>
+  <?php else: ?>
+    <div class="dropdown dropdown-fixed">
+      <button
+          id="parentDropdown"
+          type="button"
+          class="btn btn-default wn-icon-copy"
+          data-toggle="dropdown">
+          <span id="initialItem"><?php echo $items[$this->getActiveIndex()] ?><?php if (count($items) > 1): ?></span> <span class="caret"><?php endif ?>
+      </button>
+      <?php if (count($items) > 1): ?>
+      <ul id="dropdownList" class="dropdown-menu" role="menu">
+        <?php foreach ($items as $k => $item): ?>
+          <?php if ($k != $index): ?>
+            <li role="presentation">
+              <a
+                name="<?= $this->getName() ?>"
+                data-request="<?= $this->getEventHandler('onItemChange') ?>"
+                data-request-data="index: <?= $k ?>"
+                data-stripe-load-indicator
+                role="menuitem"
+                tabindex="-1"
+                href="#"
+                class="wn-icon-file-o">
+                  <?= $item ?>
+              </a>
+            </li>
+          <?php endif ?>
+        <?php endforeach ?>
+      </ul>
+      <?php endif ?>
+    </div>
+    <?php endif ?>
+</div>

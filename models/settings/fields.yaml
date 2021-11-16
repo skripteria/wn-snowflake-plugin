@@ -1,0 +1,16 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    develop:
+        label: skripteria.snowflake::lang.settings.develop
+        type: switch
+        span: left
+        comment: skripteria.snowflake::lang.settings.develop_comment
+    clear_url:
+        label: skripteria.snowflake::lang.settings.clear_url
+        type: switch
+        span: left
+        comment: skripteria.snowflake::lang.settings.clear_url_comment
+
