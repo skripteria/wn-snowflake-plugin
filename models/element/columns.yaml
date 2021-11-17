@@ -6,5 +6,12 @@ columns:
     cms_key:
         label: CMS Key
         type: text
+    type[name]:
+        label: Type
+        type: text
+    desc:
+        label: Description
+        type: text
+
 
 

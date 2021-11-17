@@ -2,16 +2,10 @@
 
 use Model;
 
-/**
- * Element Model
- */
 class Element extends Model
 {
     use \Winter\Storm\Database\Traits\Validation;
 
-    /**
-     * @var string The database table used by the model.
-     */
     public $table = 'skripteria_snowflake_elements';
 
     protected $fillable = ['*'];
@@ -20,6 +14,8 @@ class Element extends Model
         'created_at',
         'updated_at'
     ];
+
+    protected $rules = [];
 
     public $belongsTo = [
         'page' => 'Skripteria\Snowflake\Models\Page',

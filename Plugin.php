@@ -23,6 +23,7 @@ class Plugin extends PluginBase
             parse_snowflake($templateObject);
         });
 
+        $this->registerConsoleCommand('snowflake.sync', 'Skripteria\Snowflake\Console\SyncCommand');
     }
 
     public function boot()
@@ -91,5 +92,6 @@ class Plugin extends PluginBase
                 ]
             ];
     }
+
 
 }

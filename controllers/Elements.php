@@ -36,6 +36,7 @@ class Elements extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Skripteria.Snowflake', 'snowflake', 'elements');
+        $this->addCss('/plugins/skripteria/snowflake/assets/css/icons.css');
 
         $this->dropdownWidget = new Dropdown($this);
         $this->dropdownWidget->alias = 'pages';

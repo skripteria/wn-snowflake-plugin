@@ -18,3 +18,4 @@ fields:
         label: Description
         type: text
         span: full
+        readonly: true
