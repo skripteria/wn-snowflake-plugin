@@ -21,7 +21,7 @@ Snowflake tries to take care of these requirements while keeping flexibility, de
 
 ## Using Snowflake
 
-Once nstalled, you first need to add the SF Page Component to any CMS Page you want include.
+Once nstalled, you first need to add the SF Component to any CMS Layout you want include. This will allow to use the Snowflake Twig Filter on the Layout itself and any Page that is using this Layout.
 
 On these CMS page you now can add some content variables using the 'sf' Twig Filter, e.g.:
 
@@ -29,7 +29,10 @@ On these CMS page you now can add some content variables using the 'sf' Twig Fil
 
 <h1>{{ my_headline | sf('text', 'This is the main headline of this page.') }}</h1>
 ```
-The first part ('my_headline') is the Twig variable that will be used to render the content, it will be saved in the database with a corresponding 'cms_key'.  Every cms_key must be unique within a page.
+The first part ('my_headline') is the Snowflake Key that will be used to render the content. The Snowflake Key is just like a normal Twig variable as a reference to the content.
+
+Every Snowflake Key must be unique within a given Page but may conflict the keys of other Pages.
+When adding Snowflake Keys to a Layout name collisions with Pages can happen, therefore it is recommended generally prefix Snowflake Keys in layouts (e.g. 'layout_my_headline').
 
 
 The 'sn' filter then takes 2 parameters:
@@ -37,7 +40,7 @@ The 'sn' filter then takes 2 parameters:
 - Parameter 1 defines the type of the content. This controls what backend widget is used for content management.
 - Parameter 2 is optional and allows to add a description for the user who is responsible for content management.
 
-    Currently there are 6 standard types and 2 more specific ones.
+    Currently there are 6 standard types and 2 special ones.
 
     The standard types are:
 
@@ -52,23 +55,23 @@ The 'sn' filter then takes 2 parameters:
 
     - image:
 
-    It will use the Winter CMS image updload widget.
-    However it also allows to edit the img alt attribute. Therfore the variable need to pass to values, the image path and the alt attributes.
+    This is to control images and will use the Winter CMS image upload widget.
+    However it manages 2 values for rendering, the image path and the img alt attribute. Therfore the variable also needs to pass 2 values.
 
     This is done like this:
 
     ```html
-    <img src="{{ my_image.path | sf('image','This is the hero image on this page')}}" alt='{{my_image.alt }}'>
+    <img src="{{ my_image.path | sf('image','This is the hero image on this page')}}" alt='{{ my_image.alt }}'>
     ```
     Please note the 'sf' filter needs to be added only once for each image.
 
     - link : for internal Winter CMS links.
 
-     The link type allows content managers just to copy the full url of the browser window without worrying about a proper format. When saved it will be automatically converted into a clean relative link.
+     The link type allows content managers just to copy the full url of the browser window without worrying about a proper format. It will be automatically converted into a clean relative link.
 
      ### Synchronizing with the Snowflake Backend
 
-     All you need to do is to save your CMS page, it will automatically create or update the respective record in the database.
+     If you are using the Winter CMS Backend your code, all you need to do is to save your Page or Layout, Snowflake will automatically create or update the respective record in the database.
      Once a cms_key removed (or renamed) it will handle the now unused database record like this:
 
      - There is already existing content in the record: keep it

@@ -58,7 +58,7 @@ class Elements extends Controller
         // Code from wn-test, Plugins Controller
         switch($form->getField('type')->value) {
             case 1:
-                $form->addFields(['content' => ['type' => 'text', 'label' => 'Text', 'span' => 'left']]);
+                $form->addFields(['content' => ['type' => 'text', 'label' => 'Content', 'span' => 'left']]);
             break;
             case 2:
                 $form->addFields(['content' => ['type' => 'text', 'label' => 'Link', 'span' => 'left']]);
