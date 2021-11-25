@@ -40,7 +40,7 @@ The 'sn' filter then takes 2 parameters:
 - Parameter 1 defines the type of the content. This controls what backend widget is used for content management.
 - Parameter 2 is optional and allows to add a description for the user who is responsible for content management.
 
-    Currently there are 6 standard types and 2 special ones.
+    Currently Snowflake supports 7 standard types and 2 special ones.
 
     The standard types are:
 
@@ -50,6 +50,7 @@ The 'sn' filter then takes 2 parameters:
     - html (Winter CMS richtext editor)
     - code (Winter CMS code editor)
     - date (Winter CMS date picker)
+    - textarea (plain textarea field)
 
     The 2 special cases are:
 
@@ -82,7 +83,7 @@ The 'sn' filter then takes 2 parameters:
      ```sh
     php artisan snowflake:sync
     ```
-    You can use it to clean up all unused Snowflake Keys (caution: this deletes the unused content as well):
+    You can use it to clean up all unused Snowflake Keys (caution: this also deletes the attached content):
     ```sh
     php artisan snowflake:sync --cleanup
     ```

@@ -41,8 +41,6 @@ class Elements extends Controller
         $this->dropdownWidget = new Dropdown($this);
         $this->dropdownWidget->alias = 'pages';
         $this->dropdownWidget->setListItems(Page::lists( 'filename', 'id'));
-
-        // $this->dropdownWidget->setErrorMessage('Items list empty. First add items to the roles model.');
         $this->dropdownWidget->bindToController();
 
     }
@@ -81,6 +79,9 @@ class Elements extends Controller
             break;
             case 8:
                 $form->addFields(['content' => ['type' => 'datepicker', 'mode' => 'date', 'span' => 'left']]);
+            break;
+            case 9:
+                $form->addFields(['content' => ['type' => 'textarea', 'label' => 'Content', 'size' => 'huge']]);
             break;
         }
     }

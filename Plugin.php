@@ -9,7 +9,7 @@ class Plugin extends PluginBase
     public function register()
     {
         Event::listen('cms.template.save', function ( $controller, $templateObject, $type) {
-            if ($type != 'page' || $type != 'layout') return;
+            if ($type != 'page' && $type != 'layout') return;
             // (bool)$templateObject->hasComponent('sf_page') || $templateObject->hasComponent('sf_blueprint');
             parse_snowflake($templateObject, $type);
         });

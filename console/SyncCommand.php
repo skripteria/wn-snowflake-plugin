@@ -15,7 +15,7 @@ class SyncCommand extends Command
 
     public function handle()
     {
-        $this->output->text('test', 'fg=green');
+
         if ($this->option('cleanup')) {
             $this->output->writeln('Cleaning up unused cms_keys...');
         }
@@ -32,7 +32,7 @@ class SyncCommand extends Command
     }
 
     protected function syncPages() {
-    $active_theme = Theme::getActiveTheme();
+        $active_theme = Theme::getActiveTheme();
 
         foreach (Page::listInTheme($active_theme) as $page) {
             $this->output->writeln('Syncing Snowflake Page: ' . $page->getFileName());
