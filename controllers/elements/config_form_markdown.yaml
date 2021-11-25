@@ -3,7 +3,7 @@
 # ===================================
 
 # Record name
-name: Element
+name: skripteria.snowflake::lang.update.element
 
 # Model Form Field configuration
 form: $/skripteria/snowflake/models/element/fields_markdown.yaml

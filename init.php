@@ -1,20 +1,24 @@
 <?php
 namespace Skripteria\Snowflake;
-use Skripteria\Snowflake\Models\Page;
-use Skripteria\Snowflake\Models\Element;
 use Db;
 use Winter\Storm\Support\Facades\Flash;
 use Winter\Storm\Exception\ApplicationException;
+
+use Skripteria\Snowflake\Models\Page;
+use Skripteria\Snowflake\Models\Layout;
+use Skripteria\Snowflake\Models\Element;
 
 function log($message) {
     \Log::info($message);
 }
 
-function parse_snowflake($page, $cleanup = false) {
-    $content = $page->markup;
+function parse_snowflake($templateObject, $objectType, $cleanup = false) {
+    $content = $templateObject->markup;
+    //log(dump($templateObject));
+    // $type: page or partial
     preg_match_all('|{{(...*)}}|U', $content, $op);
     $tags = [];
-    log($op);
+    // log($op);
 
     foreach ($op[1] as $key=>$value) {
 
@@ -39,7 +43,7 @@ function parse_snowflake($page, $cleanup = false) {
                         $key = explode('.', $val)[0];
                     break;
                     case 1:
-                        $type = $val;
+                        $tagType = $val;
                     break;
                     case 2:
                         $desc = $val;
@@ -47,29 +51,50 @@ function parse_snowflake($page, $cleanup = false) {
             $i++;
             }
             if (count($matches) > 3 || count($matches) < 2) {
-                log("Warning: Snowflake expects 1-2 parameters, ". count($matches)-1 . " detected: Tag {{ $value }}  ,page: ".$page->getFilename());
+                log("Warning: Snowflake expects 1-2 parameters, ". count($matches)-1 . " detected: Tag {{ $value }}  ,page: ".$templateObject->getFilename());
 
             } else {
-                if (! strlen($type)) throw new ApplicationException("Snowflake: invalid tag: {{ $value }} (on page: ".$page->getFilename().")");
-                $tags[$key]['type'] = $type;
+                if (! strlen($tagType)) throw new ApplicationException("Snowflake: invalid tag: {{ $value }} (on page: ".$templateObject->getFilename().")");
+                $tags[$key]['type'] = $tagType;
                 $tags[$key]['desc'] = $desc;
             }
         }
     }
-    sync_db($tags, $page, $cleanup);
+    sync_db($tags, $templateObject, $objectType, $cleanup);
 }
 
-function sync_db($tags, $page, $cleanup) {
+function sync_db($tags, $templateObject, $objectType, $cleanup) {
 
-    $filename = $page->getBaseFileName();
-    $sfpage = Db::table('skripteria_snowflake_pages')->where('filename', $filename)->first();
-    if (! $sfpage) {
-        $sfpage = new Page;
-        $sfpage->filename = $filename;
-        $sfpage->save();
-    }
-    $elements = Db::table('skripteria_snowflake_elements')->where('page_id', $sfpage->id)->get();
+    log ($tags);
+
+    $filename = $templateObject->getBaseFileName();
     $types_raw = Db::table('skripteria_snowflake_types')->get();
+
+    switch ($objectType) {
+        case "page" :
+            $sfpage = Db::table('skripteria_snowflake_pages')->where('filename', $filename)->first();
+            if (! $sfpage) {
+                $sfpage = new Page;
+                $sfpage->filename = $filename;
+                $sfpage->save();
+            }
+            $elements = Db::table('skripteria_snowflake_elements')->where('page_id', $sfpage->id)->get();
+            break;
+
+        case "layout" :
+            $sfpage = Db::table('skripteria_snowflake_layouts')->where('filename', $filename)->first();
+            if (! $sfpage) {
+                $sfpage = new Layout;
+                $sfpage->filename = $filename;
+                $sfpage->save();
+            }
+            $elements = Db::table('skripteria_snowflake_elements')->where('layout_id', $sfpage->id)->get();
+            break;
+
+        default:
+        return;
+
+    }
 
     $types = [];
 
@@ -84,7 +109,7 @@ function sync_db($tags, $page, $cleanup) {
         $db_array[$element->cms_key]['desc'] = $element->desc;
         $db_array[$element->cms_key]['id'] = $element->id;
 
-        // Clean up empty database records
+        // Clean up unused database records
         if (! isset($tags[$element->cms_key])) {
             $el = Element::find($db_array[$element->cms_key]["id"]);
             if (($el->type_id != 3 && empty($el->content)) || ($el->type_id == 3 && empty($el->image->path)) || $cleanup) {
@@ -99,7 +124,7 @@ function sync_db($tags, $page, $cleanup) {
     foreach ($tags as $cms_key =>$value) {
         if (! isset($types[$value['type']])) {
 
-            $pname = $page->getFilename();
+            $pname = $templateObject->getFilename();
             throw new ApplicationException("Snowflake: type '".$value['type']."' is not supported (page: $pname)
 
             supported are: text markdown html code link color date image");
@@ -120,7 +145,14 @@ function sync_db($tags, $page, $cleanup) {
             $el = new Element();
             $el->type = $types[$value["type"]];
             $el->desc = $value["desc"];
-            $el->page_id = $sfpage->id;
+            switch($objectType) {
+                case 'page':
+                    $el->page_id = $sfpage->id;
+                break;
+                case 'layout':
+                    $el->layout_id = $sfpage->id;
+                break;
+            }
             $el->cms_key = $cms_key;
             $el->save();
         }

@@ -12,7 +12,8 @@ class CreateElementsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->timestamps();
-            $table->integer('page_id')->nullable()->default(1);
+            $table->integer('page_id')->nullable()->default(null);
+            $table->integer('layout_id')->nullable()->default(null);
             $table->integer('type_id')->nullable();
             $table->string('desc', 255)->nullable();
             $table->text('content')->nullable();

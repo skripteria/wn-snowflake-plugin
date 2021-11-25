@@ -20,7 +20,6 @@ class BlueprintPage extends SfPage
     }
 
     public function onRun() {
-        \Skripteria\Snowflake\test_log('testlog');
         if (!(bool)Settings::get('develop')) return Redirect::to('404');
         parent::onRun();
     }

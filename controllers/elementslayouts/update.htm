@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('skripteria/snowflake/elements') ?>"> <?= e(trans('skripteria.snowflake::lang.update.elements')) ?></a></li>
+        <li><a href="<?= Backend::url('skripteria/snowflake/elementslayouts') ?>"> <?= e(trans('skripteria.snowflake::lang.update.elements_layouts')) ?></a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
@@ -20,7 +20,7 @@
                     data-request="onSave"
                     data-request-data="redirect:0"
                     data-hotkey="ctrl+s, cmd+s"
-                    data-load-indicator="Saving Element..."
+                    data-load-indicator="Saving Elementslayout..."
                     class="btn btn-primary">
                     <?= e(trans('backend::lang.form.save')) ?>
                 </button>
@@ -29,7 +29,7 @@
                     data-request="onSave"
                     data-request-data="close:1"
                     data-hotkey="ctrl+enter, cmd+enter"
-                    data-load-indicator="Saving Element..."
+                    data-load-indicator="Saving Elementslayout..."
                     class="btn btn-default">
                     <?= e(trans('backend::lang.form.save_and_close')) ?>
                 </button>
@@ -37,11 +37,11 @@
                     type="button"
                     class="oc-icon-trash-o btn-icon danger pull-right"
                     data-request="onDelete"
-                    data-load-indicator="Deleting Element..."
-                    data-request-confirm="Delete this element?">
+                    data-load-indicator="Deleting Elementslayout..."
+                    data-request-confirm="Delete this elementslayout?">
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('skripteria/snowflake/elements') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
+                    or <a href="<?= Backend::url('skripteria/snowflake/elementslayouts') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
                 </span>
             </div>
         </div>
@@ -51,6 +51,6 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('skripteria/snowflake/elements') ?>" class="btn btn-default">Return to elements list</a></p>
+    <p><a href="<?= Backend::url('skripteria/snowflake/elementslayouts') ?>" class="btn btn-default">Return to elements layouts list</a></p>
 
 <?php endif ?>

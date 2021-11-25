@@ -14,6 +14,21 @@ return [
     ],
     'list' => [
         'select_page' => 'Select Page: ',
-        'error_no_page' => 'No CMS Page has been set up for Snowflake yet. Please add the SF Page Component to your CMS Pages first.'
-    ]
+        'error_no_page' => 'No CMS Page has been set up for Snowflake yet. Please add the SF Page Component to your CMS Pages first.',
+        'select_layout' => 'Select Layout: ',
+        'error_no_page' => 'No CMS Layout has been set up for Snowflake yet. Please add the SF Page Component to your Layout first.',
+        'new_element' => 'New Element',
+        'delete_element' => 'Delete selected',
+        'manage_elements' => 'Manage Page Elements',
+        'manage_elements_layouts' => 'Manage Layout Elements',
+    ],
+    'update' => [
+        'element' => 'Element',
+        'save' => 'Save',
+        'save_close' => 'Save and Close',
+        'cancel' => 'Cancel',
+        'elements' => 'Elements',
+        'elements_layouts' => 'Layout Elements'
+    ],
+
     ];

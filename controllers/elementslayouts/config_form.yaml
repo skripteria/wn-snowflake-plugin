@@ -5,7 +5,6 @@
 # Record name
 name: skripteria.snowflake::lang.update.element
 
-
 # Model Form Field configuration
 form: $/skripteria/snowflake/models/element/fields.yaml
 
@@ -13,19 +12,19 @@ form: $/skripteria/snowflake/models/element/fields.yaml
 modelClass: Skripteria\Snowflake\Models\Element
 
 # Default redirect location
-defaultRedirect: skripteria/snowflake/elements
+defaultRedirect: skripteria/snowflake/elementslayouts
 
 # Create page
 create:
     title: backend::lang.form.create_title
-    redirect: skripteria/snowflake/elements/update/:id
-    redirectClose: skripteria/snowflake/elements
+    redirect: skripteria/snowflake/elementslayouts/update/:id
+    redirectClose: skripteria/snowflake/elementslayouts
 
 # Update page
 update:
     title: backend::lang.form.update_title
-    redirect: skripteria/snowflake/elements
-    redirectClose: skripteria/snowflake/elements
+    redirect: skripteria/snowflake/elementslayouts
+    redirectClose: skripteria/snowflake/elementslayouts
 
 # Preview page
 preview:

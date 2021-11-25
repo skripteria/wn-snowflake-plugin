@@ -13,4 +13,10 @@ fields:
         type: switch
         span: left
         comment: skripteria.snowflake::lang.settings.clear_url_comment
-
+    custom_name:
+        label: skripteria.snowflake::lang.settings_custom_name
+        type: text
+        span: left
+        default: Snowflake
+    
+    

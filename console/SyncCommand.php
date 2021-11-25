@@ -4,6 +4,8 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Skripteria\Snowflake\Models\Settings;
 use Cms\Classes\Page;
+use Cms\Classes\Layout;
+use Cms\Classes\Theme;
 
 class SyncCommand extends Command
 {
@@ -22,8 +24,6 @@ class SyncCommand extends Command
         $this->output->success('Snowflake sync complete');
     }
 
-
-
     protected function getOptions()
     {
         return [
@@ -32,15 +32,17 @@ class SyncCommand extends Command
     }
 
     protected function syncPages() {
-        foreach (Page::all() as $page)
-        {
-            if ($page->hasComponent('sf_page'))  {
-                $this->output->writeln('Syncing Snowflake: ' . $page->getFileName());
-                \Skripteria\Snowflake\parse_snowflake($page, $this->option('cleanup'));
-                $page->save();
-            }
+    $active_theme = Theme::getActiveTheme();
+
+        foreach (Page::listInTheme($active_theme) as $page) {
+            $this->output->writeln('Syncing Snowflake Page: ' . $page->getFileName());
+            \Skripteria\Snowflake\parse_snowflake($page,'page', $this->option('cleanup'));
         }
 
-
+        foreach (Layout::listInTheme($active_theme) as $layout) {
+            $this->output->writeln('Syncing Snowflake Layout: ' . $layout->getFileName());
+            \Skripteria\Snowflake\parse_snowflake($layout,'layout', $this->option('cleanup'));
+        }
     }
+
 }

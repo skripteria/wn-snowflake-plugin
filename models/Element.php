@@ -19,6 +19,7 @@ class Element extends Model
 
     public $belongsTo = [
         'page' => 'Skripteria\Snowflake\Models\Page',
+        'layout' => 'Skripteria\Snowflake\Models\Layout',
         'type' => 'Skripteria\Snowflake\Models\Type',
     ];
     public $attachOne = [
@@ -27,6 +28,11 @@ class Element extends Model
 
     public function scopeWithPage($query, $filtered) {
         return $query->whereHas('page', function($q) use ($filtered) {
+            $q->where('id', $filtered);
+        });
+    }
+    public function scopeWithLayout($query, $filtered) {
+        return $query->whereHas('layout', function($q) use ($filtered) {
             $q->where('id', $filtered);
         });
     }

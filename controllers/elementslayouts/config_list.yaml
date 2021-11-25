@@ -9,10 +9,10 @@ list: $/skripteria/snowflake/models/element/columns.yaml
 modelClass: Skripteria\Snowflake\Models\Element
 
 # List Title
-title: skripteria.snowflake::lang.list.manage_elements
+title: skripteria.snowflake::lang.list.manage_elements_layouts
 
 # Link URL for each record
-recordUrl: skripteria/snowflake/elements/update/:id
+recordUrl: skripteria/snowflake/elementslayouts/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records
