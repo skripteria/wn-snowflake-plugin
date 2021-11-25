@@ -72,17 +72,17 @@ The 'sn' filter then takes 2 parameters:
      ### Synchronizing with the Snowflake Backend
 
      If you are using the Winter CMS Backend your code, all you need to do is to save your Page or Layout, Snowflake will automatically create or update the respective record in the database.
-     Once a cms_key removed (or renamed) it will handle the now unused database record like this:
+     Once a Snowflake Key is removed (or renamed) it will handle the now unused database record like this:
 
      - There is already existing content in the record: keep it
      - Otherwise: delete it
 
-     Alternatively there is a console command to sync all CMS Pages:
+     Alternatively there is a console command to sync all CMS Pages and Layouts:
 
      ```sh
     php artisan snowflake:sync
     ```
-    You can use it to clean up all unused cms_keys (caution: this deletes all content currently not in use):
+    You can use it to clean up all unused Snowflake Keys (caution: this deletes the unused content as well):
     ```sh
     php artisan snowflake:sync --cleanup
     ```
