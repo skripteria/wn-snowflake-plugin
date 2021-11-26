@@ -46,7 +46,7 @@ class Plugin extends PluginBase
 
     public function registerNavigation()
     {
-        $label = (Settings::get('custom_name'));
+        if (! $label = Settings::get('custom_name')) $label = "Snowflake";
         return [
             'snowflake' => [
                 'label'       => $label,
