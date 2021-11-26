@@ -8,20 +8,25 @@ class Plugin extends PluginBase
 {
     public function register()
     {
+
+        Event::listen('backend.page.beforeDisplay', function($controller, $action, $params) {
+            $controller->addCss('/plugins/skripteria/snowflake/assets/css/icons.css');
+        });
+
         Event::listen('cms.template.save', function ( $controller, $templateObject, $type) {
             if ($type != 'page' && $type != 'layout') return;
-            // (bool)$templateObject->hasComponent('sf_page') || $templateObject->hasComponent('sf_blueprint');
             parse_snowflake($templateObject, $type);
         });
 
         $this->registerConsoleCommand('snowflake.sync', 'Skripteria\Snowflake\Console\SyncCommand');
+
     }
 
     public function registerComponents()
     {
         return [
             'Skripteria\Snowflake\Components\SfPage' => 'sf_page',
-            'Skripteria\Snowflake\Components\BlueprintPage' => 'blueprint_page',
+            // 'Skripteria\Snowflake\Components\BlueprintPage' => 'blueprint_page',
         ];
     }
 
@@ -46,18 +51,18 @@ class Plugin extends PluginBase
             'snowflake' => [
                 'label'       => $label,
                 'url'         => Backend::url('skripteria/snowflake/Elements'),
-                'icon'        => 'icon-snowflake',
+                'iconSvg'     => 'plugins/skripteria/snowflake/assets/icons/snowflake-blue.svg',
                 'permissions' => ['skripteria.snowflake.*'],
                 'order'       => 500,
                 'sideMenu' => [
                     'pages' => [
-                        'label' => 'Pages',
+                        'label' => 'skripteria.snowflake::lang.plugin.pages',
                         'url' => Backend::url('skripteria/snowflake/Elements'),
                         'icon' => 'wn-icon-copy',
                         'permissions' => ['skripteria.snowflake.*'],
                     ],
                     'layouts' => [
-                        'label' => 'Layouts',
+                        'label' => 'skripteria.snowflake::lang.plugin.layouts',
                         'url' => Backend::url('skripteria/snowflake/ElementsLayouts'),
                         'icon' => 'wn-icon-th-large',
                         'permissions' => ['skripteria.snowflake.*'],
@@ -75,7 +80,7 @@ class Plugin extends PluginBase
                 'label' => $label,
                 'description' => 'skripteria.snowflake::lang.plugin.manage_settings',
                 'category' => 'system::lang.system.categories.cms',
-                'icon' => 'icon-snowflake',
+                'icon'     => 'icon-snowflake',
                 'class' => 'Skripteria\Snowflake\Models\Settings',
                 'order' => 500,
                 'keywords' => 'snowflake',
@@ -98,10 +103,9 @@ class Plugin extends PluginBase
 
     public function pluginDetails()
     {
-        $name = "Snowflake";
         return [
-            'name'        =>  $name,
-            'description' => 'Content Manger for CMS Pages',
+            'name'        => 'Snowflake',
+            'description' => 'skripteria.snowflake::lang.plugin.desc',
             'author'      => 'Skripteria',
             'icon'        => 'icon-snowflake'
         ];

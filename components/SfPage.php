@@ -11,22 +11,15 @@ class SfPage extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'SF Page Component',
-            'description' => 'Manage Content in Snowflake Cms',
+            'name'        => 'Snowflake',
+            'description' => 'skripteria.snowflake::lang.components.sf_page_desc',
             'icon' => 'icon-snowflake'
         ];
     }
 
     public function defineProperties()
     {
-        return [
-            'blueprints' => [
-                'title' => 'Blueprint Pages',
-                'type' => 'dropdown',
-                'default' => 'imperial',
-                'placeholder' => 'no Blueprint Page',
-                ]
-            ];
+        return [];
     }
 
     public function getBlueprintsOptions() {

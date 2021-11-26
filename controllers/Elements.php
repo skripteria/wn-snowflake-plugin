@@ -36,7 +36,6 @@ class Elements extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Skripteria.Snowflake', 'snowflake', 'elements');
-        $this->addCss('/plugins/skripteria/snowflake/assets/css/icons.css');
 
         $this->dropdownWidget = new Dropdown($this);
         $this->dropdownWidget->alias = 'pages';
@@ -53,7 +52,6 @@ class Elements extends Controller
 
     public function formExtendFields($form)
     {
-        // Code from wn-test, Plugins Controller
         switch($form->getField('type')->value) {
             case 1:
                 $form->addFields(['content' => ['type' => 'text', 'label' => 'Content', 'span' => 'left']]);

@@ -6,12 +6,15 @@ columns:
     cms_key:
         label: Snowflake Key
         type: text
+        searchable: true
     type[name]:
         label: Type
         type: text
+        searchable: true
     desc:
         label: Description
         type: text
+        searchable: true
 
 
 

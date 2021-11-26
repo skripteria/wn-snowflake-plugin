@@ -1,6 +1,7 @@
 <?php namespace Skripteria\Snowflake\Models;
 
 use Model;
+use Skripteria\Snowflake\Models\Settings;
 
 class Element extends Model
 {
@@ -22,6 +23,7 @@ class Element extends Model
         'layout' => 'Skripteria\Snowflake\Models\Layout',
         'type' => 'Skripteria\Snowflake\Models\Type',
     ];
+
     public $attachOne = [
         'image' => 'System\Models\File',
     ];
