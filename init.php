@@ -14,11 +14,9 @@ function log($message) {
 
 function parse_snowflake($templateObject, $objectType, $cleanup = false) {
     $content = $templateObject->markup;
-    //log(dump($templateObject));
-    // $type: page or partial
+
     preg_match_all('|{{(...*)}}|U', $content, $op);
     $tags = [];
-    // log($op);
 
     foreach ($op[1] as $key=>$value) {
 

@@ -62,9 +62,9 @@ The 'sn' filter then takes 2 parameters:
     This is done like this:
 
     ```html
-    <img src="{{ my_image.path | sf('image','This is the hero image on this page')}}" alt='{{ my_image.alt }}'>
+    <img src="{{ my_image | sf('image','This is the hero image on this page')}}" alt='{{ my_image_alt }}'>
     ```
-    Please note the 'sf' filter needs to be added only once for each image.
+    Please note the 'sf' filter is only added once in the src attribute, the alt attribute then just uses the same key with the suffix "_alt".
 
     - link : for internal Winter CMS links.
 
