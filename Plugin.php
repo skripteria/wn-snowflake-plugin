@@ -17,9 +17,8 @@ class Plugin extends PluginBase
             if ($type != 'page' && $type != 'layout') return;
             parse_snowflake($templateObject, $type);
         });
-
+      
         $this->registerConsoleCommand('snowflake.sync', 'Skripteria\Snowflake\Console\SyncCommand');
-
     }
 
     public function registerComponents()

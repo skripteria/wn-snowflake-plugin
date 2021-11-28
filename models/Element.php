@@ -7,7 +7,14 @@ class Element extends Model
 {
     use \Winter\Storm\Database\Traits\Validation;
 
+    public $implement = ['@Winter.Translate.Behaviors.TranslatableModel'];
+
     public $table = 'skripteria_snowflake_elements';
+
+    public $translatable = [
+        'content',
+        'alt',
+    ];
 
     protected $fillable = ['*'];
 
@@ -27,6 +34,7 @@ class Element extends Model
     public $attachOne = [
         'image' => 'System\Models\File',
     ];
+
 
     public function scopeWithPage($query, $filtered) {
         return $query->whereHas('page', function($q) use ($filtered) {

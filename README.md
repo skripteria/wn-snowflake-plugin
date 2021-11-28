@@ -44,10 +44,10 @@ The 'sn' filter then takes 2 parameters:
 
     The standard types are:
 
-    - text (simple text field, e.g. for headlines)
+    - text (simple text input, e.g. for headlines)
     - color (Winter CMS color picker)
     - markdown (Winter MCS markdown editor)
-    - html (Winter CMS richtext editor)
+    - richeditor (Winter CMS richtext editor)
     - code (Winter CMS code editor)
     - date (Winter CMS date picker)
     - textarea (plain textarea field)

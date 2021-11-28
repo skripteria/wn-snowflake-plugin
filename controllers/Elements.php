@@ -50,37 +50,40 @@ class Elements extends Controller
     }
 
 
-    public function formExtendFields($form)
+    public function formExtendFieldsBefore($form)
     {
-        switch($form->getField('type')->value) {
+
+        switch($form->model->attributes["type_id"]) {
             case 1:
-                $form->addFields(['content' => ['type' => 'text', 'label' => 'Content', 'span' => 'left']]);
+                $form->fields = $form->fields + ['content' => ['type' => 'text', 'label' => 'Content', 'span' => 'left']];
             break;
             case 2:
-                $form->addFields(['content' => ['type' => 'text', 'label' => 'Link', 'span' => 'left']]);
+                $form->fields = $form->fields + ['content' => ['type' => 'text', 'label' => 'Link', 'span' => 'left']];
             break;
             case 3:
-                $form->addFields(['image' => ['type' => 'fileupload', 'label' => 'image','mode' => 'image', 'span' => 'left']]);
-                $form->addFields(['alt' => ['type' => 'text', 'label' => 'Alt Attribute', 'span' => 'left']]);
+                $form->fields = $form->fields + ['image' => ['type' => 'fileupload', 'label' => 'image','mode' => 'image', 'span' => 'left']];
+                $form->fields = $form->fields + ['alt' => ['type' => 'text', 'label' => 'Alt Attribute', 'span' => 'left']];
             break;
             case 4:
-                $form->addFields(['content' => ['type' => 'colorpicker', 'span' => 'left', 'label' => 'Color']]);
+                $form->fields = $form->fields + ['content' => ['type' => 'colorpicker', 'span' => 'left', 'label' => 'Color']];
             break;
             case 5:
-                $form->addFields(['content' => ['type' => 'markdown', 'size' => 'huge']]);
+                $form->fields = $form->fields + ['content' => ['type' => 'markdown', 'size' => 'huge']];
             break;
             case 6:
-                $form->addFields(['content' => ['type' => 'richeditor', 'size' => 'huge']]);
+                $form->fields = $form->fields + ['content' => ['type' => 'richeditor', 'size' => 'huge']];
             break;
             case 7:
-                $form->addFields(['content' => ['type' => 'codeeditor', 'size' => 'huge']]);
+                $form->fields = $form->fields + ['content' => ['type' => 'codeeditor', 'size' => 'huge']];
             break;
             case 8:
-                $form->addFields(['content' => ['type' => 'datepicker', 'mode' => 'date', 'span' => 'left']]);
+                $form->fields = $form->fields + ['content' => ['type' => 'datepicker', 'mode' => 'date', 'span' => 'left']];
             break;
             case 9:
-                $form->addFields(['content' => ['type' => 'textarea', 'label' => 'Content', 'size' => 'huge']]);
+                $form->fields = $form->fields + ['content' => ['type' => 'textarea', 'label' => 'Content', 'size' => 'huge']];
             break;
         }
     }
+
+    
 }
