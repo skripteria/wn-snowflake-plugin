@@ -1,8 +1,8 @@
 ## Snowflake for Winter CMS
 
-This is a proof of concept version of a simplified database driven Content Manager within Winter CMS.
+This is the beta version of the "Snowflake Plugin" for Winter CMS.
 
-### Why a new CMS within a CMS at all?
+### Why a new "CMS" within a CMS at all?
 
 In real life there are at least 4 different user types that all need to be taken care of the same time:
 
@@ -11,13 +11,13 @@ In real life there are at least 4 different user types that all need to be taken
 - The web interested end user who has a vision of how things should look like and trying hard to make it happen somehow. Hes is not afraid of playing around with customisation, a typical Wordpress customer.
 - The non-technical user who occasionally has to do some content editing because the job or business demands so.
 
-The first 3 customer types are regularly taken into consideration when talking about how a CMS should look like, the last user type is often been ignored.
+The first 3 customer types are regularly taken into consideration when talking about how a CMS should look like, the last user type is often been forgotten.
 
 However, when you develop a site for a paying customer the last customer type is the one that you will end up with.
 
-The consequence is that you need to make content management bullet proof and hide everything but the very specific pieces of content that need be managed.
+The consequence is that you need to make content management bullet proof and hide everything but the very specific pieces of content that need to be managed.
 
-Snowflake tries to take care of these requirements while keeping flexibility, devlopment speed and UI benefits of Winter CMS.
+Snowflake takes care of this by automizing the power the Winter CMS backend framework.
 
 ## Using Snowflake
 
