@@ -18,9 +18,8 @@ return [
     ],
     'list' => [
         'select_page' => 'Select Page: ',
-        'error_no_page' => 'No CMS Pages found in Snowflake, please run a Sync first ( e.g.: php artisan snowflake:sync)',
+        'error_no_page' => 'No Snowflake content found yet.',
         'select_layout' => 'Select Layout: ',
-        'error_no_page' => 'No CMS Pages found in Snowflake, please run a Sync first ( e.g.: php artisan snowflake:sync)',
         'new_element' => 'New Element',
         'delete_element' => 'Delete selected',
         'manage_elements' => 'Manage Page Content',

@@ -17,7 +17,7 @@ class Plugin extends PluginBase
             if ($type != 'page' && $type != 'layout') return;
             parse_snowflake($templateObject, $type);
         });
-      
+
         $this->registerConsoleCommand('snowflake.sync', 'Skripteria\Snowflake\Console\SyncCommand');
     }
 
@@ -73,10 +73,9 @@ class Plugin extends PluginBase
 
     public function registerSettings() {
 
-        $label = (Settings::get('custom_name'));
         return [
             'snowflake' => [
-                'label' => $label,
+                'label' => 'Snowflake',
                 'description' => 'skripteria.snowflake::lang.plugin.manage_settings',
                 'category' => 'system::lang.system.categories.cms',
                 'icon'     => 'icon-snowflake',
@@ -85,7 +84,6 @@ class Plugin extends PluginBase
                 'keywords' => 'snowflake',
                 'permissions' => ['skripteria.snowflake.manage_snowflake'],
             ],
-
         ];
     }
 

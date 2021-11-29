@@ -63,7 +63,7 @@ function parse_snowflake($templateObject, $objectType, $cleanup = false) {
 
 function sync_db($tags, $templateObject, $objectType, $cleanup) {
 
-    log ($tags);
+    if (count($tags) == 0) return;
 
     $filename = $templateObject->getBaseFileName();
     $types_raw = Db::table('skripteria_snowflake_types')->get();
