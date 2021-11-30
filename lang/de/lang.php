@@ -14,7 +14,9 @@ return [
         'develop_comment' =>'Erlaubt Zugriff auf Blueprint Pages im Frontend',
         'clear_url' => 'SEO image urls',
         'clear_url_comment' => 'Original Dateinamen für Images beibehalten',
-        'custom_name' => 'Snowflake Menu Label'
+        'custom_name' => 'Snowflake Menu Label',
+        'markdown_mode' => 'Markdown Split Modus',
+        'markdown_mode_comment' => 'Aktiviert den Split Modus des Markdown Editors',
     ],
     'list' => [
         'select_page' => 'Seite auswählen: ',

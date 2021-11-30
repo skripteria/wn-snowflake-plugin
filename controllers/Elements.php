@@ -4,6 +4,7 @@ use BackendMenu;
 use Backend\Classes\Controller;
 use Skripteria\Snowflake\Widgets\Dropdown;
 use Skripteria\Snowflake\Models\Page;
+use Skripteria\Snowflake\Models\Settings;
 
 /**
  * Elements Back-end Controller
@@ -52,6 +53,8 @@ class Elements extends Controller
 
     public function formExtendFieldsBefore($form)
     {
+        $md_mode = 'tab';
+        if (Settings::get('markdown_mode')) $md_mode = 'split';
 
         switch($form->model->attributes["type_id"]) {
             case 1:
@@ -68,7 +71,8 @@ class Elements extends Controller
                 $form->fields = $form->fields + ['content' => ['type' => 'colorpicker', 'span' => 'left', 'label' => 'Color']];
             break;
             case 5:
-                $form->fields = $form->fields + ['content' => ['type' => 'markdown', 'size' => 'huge']];
+
+                $form->fields = $form->fields + ['content' => ['type' => 'markdown', 'mode' => $md_mode, 'size' => 'huge']];
             break;
             case 6:
                 $form->fields = $form->fields + ['content' => ['type' => 'richeditor', 'size' => 'huge']];
@@ -85,5 +89,5 @@ class Elements extends Controller
         }
     }
 
-    
+
 }

@@ -14,7 +14,10 @@ return [
         'develop_comment' =>'Allows access to blueprint pages in frontent',
         'clear_url' => 'Clear Image Urls',
         'clear_url_comment' => 'Use original filenames for image and file urls',
-        'custom_name' => 'Snowflake Menu Label'
+        'custom_name' => 'Snowflake Menu Label',
+        'markdown_mode' => 'Markdown split mode',
+        'markdown_mode_comment' => 'Activates the split mode for the markdown editor',
+
     ],
     'list' => [
         'select_page' => 'Select Page: ',

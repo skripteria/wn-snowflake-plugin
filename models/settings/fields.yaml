@@ -18,4 +18,10 @@ fields:
         type: text
         span: left
         default: Snowflake
+    markdown_mode:
+        label: skripteria.snowflake::lang.settings.markdown_mode
+        type: switch
+        span: left
+        comment: skripteria.snowflake::lang.settings.markdown_mode_comment
+        default: split
 
