@@ -17,5 +17,6 @@ class seedTypes extends Seeder {
         Type::create(['name' => 'code', 'id' => 7]);
         Type::create(['name' => 'date', 'id' => 8]);
         Type::create(['name' => 'textarea', 'id' => 9]);
+        Type::create(['name' => 'file', 'id' => 10]);
     }
 }

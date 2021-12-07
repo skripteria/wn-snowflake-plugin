@@ -84,6 +84,10 @@ class ElementsLayouts extends Controller
             case 9:
                 $form->fields = $form->fields + ['content' => ['type' => 'textarea', 'label' => 'Content', 'size' => 'huge']];
             break;
+            case 10:
+                $form->fields = $form->fields + ['file' => ['type' => 'fileupload', 'label' => 'file', 'mode'=>'file', 'span' => 'left']];
+                $form->fields = $form->fields + ['filename' => ['type' => 'text', 'label' => 'Filename', 'span' => 'left']];
+            break;
         }
     }
 

@@ -56,24 +56,26 @@ class SfPage extends ComponentBase
                 case 3:
                     if ($element->image) {
                         $path = $element->image->getPath();
-
-                        $img = [
-                            'path' => $element->image->getPath(),
-                            'alt' => $element->alt
-                        ];
                     } else {
                         $path = '';
-                        $img = [
-                            'path' =>'',
-                            'alt' => $element->alt
-                        ];
                     }
+
                     $this->page[$element->cms_key] = $path;
                     $this->page[$element->cms_key.'_alt'] = $element->alt;
                 break;
 
                 case 5:
                     $this->page[$element->cms_key] = Markdown::parse($element->content);
+                break;
+
+                case 10:
+                    if ($element->file) {
+                        $path = $element->file->getPath();
+                    } else {
+                        $path = '';
+                    }
+                    $this->page[$element->cms_key] = $path;
+                    $this->page[$element->cms_key.'_name'] = $element->filename;
                 break;
 
                 default:

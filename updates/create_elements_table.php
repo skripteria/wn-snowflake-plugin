@@ -21,6 +21,7 @@ class CreateElementsTable extends Migration
             $table->string('alt')->nullable();
             $table->string('cms_key')->nullable();
             $table->integer('order')->nullable();
+            $table->string('filename')->nullable();
         });
     }
 

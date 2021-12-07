@@ -33,6 +33,7 @@ class Element extends Model
 
     public $attachOne = [
         'image' => 'System\Models\File',
+        'file' => 'System\Models\File',
     ];
 
 

@@ -2,6 +2,17 @@
 
 This is the beta version of the "Snowflake Plugin" for Winter CMS.
 
+## Installation from Github repo
+- inside the plugin folder of  your Winter installation create a new folder skripteria/snowflake
+- cd into skripteria/snowflake
+- run
+```sh
+git clone https://github.com/skripteria/wn-snowflake-plugin.git .
+```
+- from the Winter project root run
+```sh
+php artisan winter:up
+```
 ### Why a new "CMS" within a CMS at all?
 
 In real life there are at least 4 different user types that all need to be taken care of the same time:
@@ -52,7 +63,7 @@ The 'sn' filter then takes 2 parameters:
     - date (Winter CMS date picker)
     - textarea (plain textarea field)
 
-    The 2 special cases are:
+    The 3 special cases are:
 
     - image:
 
@@ -65,6 +76,16 @@ The 'sn' filter then takes 2 parameters:
     <img src="{{ my_image | sf('image','This is the hero image on this page')}}" alt='{{ my_image_alt }}'>
     ```
     Please note the 'sf' filter is only added once in the src attribute, the alt attribute then just uses the same key with the suffix "_alt".
+
+    - file:
+
+    This is to control file uploads. Like image it manages 2 values, this time the file path and the filename which shows up in the link.
+
+    Similar to images this is how its done:
+
+    ```html
+    <a href="{{ my_file | sf('file', 'This is my uploaded file')}}">{{ my_file_name }}</a>
+    ```
 
     - link : for internal Winter CMS links.
 

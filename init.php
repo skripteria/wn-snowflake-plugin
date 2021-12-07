@@ -15,49 +15,39 @@ function log($message) {
 function parse_snowflake($templateObject, $objectType, $cleanup = false) {
     $content = $templateObject->markup;
 
-    preg_match_all('|{{(...*)}}|U', $content, $op);
+    preg_match_all('|\{{2}\s*(\w+)\s*\|\s*sf\((.*)\)\s*\}{2}|', $content, $matches);
     $tags = [];
 
-    foreach ($op[1] as $key=>$value) {
+    foreach($matches[1] as $k=>$v) {
+        $param_string = $matches[2][$k];
+        $param_string = str_replace(['\'','\"',' '], '', $param_string);
+        $params = explode(',', $param_string);
 
-        $checkval = str_replace(' ','', $value);
+        $sf_key = $v;
 
-        if (strpos($checkval, '|sf(')) {
-            $pattern = "|([\w\.\ ]+)|";
-            preg_match_all($pattern, $value, $matches);
+        // Skip if Sf Key ends with _alt or _name
+        if (substr($sf_key, -4) == "_alt" || substr($sf_key, -5) == "_name") continue;
 
-            $matches = $matches[0];
-            foreach ($matches as $mkey=>$match) {
-                $matches[$mkey] = $match = trim($match, ' ');
-                if (empty($match) || $match == 'sf') unset($matches[$mkey]);
-            }
-
-            $i = 0;
-            $desc = '';
-
-            foreach($matches as $val) {
-                switch ($i) {
-                    case 0:
-                        $key = explode('.', $val)[0];
+        if (count($params) == 0 || strlen($sf_key) == 0) {
+            throw new ApplicationException("Snowflake: invalid tag: {{ $sf_key }} (on page: ".$templateObject->getFilename().")");
+        }
+        $tags[$sf_key] = ['type'=>'','desc'=>'','default'=>''];
+        foreach ($params as $i=>$param) {
+            switch ($i) {
+                case 0:
+                    $tags[$sf_key]['type'] = $param;
                     break;
-                    case 1:
-                        $tagType = $val;
+                case 1:
+                    $tags[$sf_key]['desc'] = $param;
                     break;
-                    case 2:
-                        $desc = $val;
-                }
-            $i++;
-            }
-            if (count($matches) > 3 || count($matches) < 2) {
-                log("Warning: Snowflake expects 1-2 parameters, ". count($matches)-1 . " detected: Tag {{ $value }}  ,page: ".$templateObject->getFilename());
-
-            } else {
-                if (! strlen($tagType)) throw new ApplicationException("Snowflake: invalid tag: {{ $value }} (on page: ".$templateObject->getFilename().")");
-                $tags[$key]['type'] = $tagType;
-                $tags[$key]['desc'] = $desc;
+                case 2:
+                   if ($tags[$sf_key]['type'] != 'image' && $tags[$sf_key]['type'] != 'file')
+                    $tags[$sf_key]['default'] = $param;
+                break;
             }
         }
     }
+
     sync_db($tags, $templateObject, $objectType, $cleanup);
 }
 
@@ -119,23 +109,21 @@ function sync_db($tags, $templateObject, $objectType, $cleanup) {
         }
     }
 
-    foreach ($tags as $cms_key =>$value) {
+    foreach ($tags as $sf_key=>$value) {
         if (! isset($types[$value['type']])) {
 
             $pname = $templateObject->getFilename();
             throw new ApplicationException("Snowflake: type '".$value['type']."' is not supported (page: $pname)
-
-            supported are: text markdown html code link color date image");
-            Flash::warning('test');
+            supported are: text markdown richeditor code link color date image textarea file");
 
             continue;
         }
 
-        if (isset($db_array[$cms_key])) {
+        if (isset($db_array[$sf_key])) {
             // Update
-            $el = Element::find($db_array[$cms_key]["id"]);
+            $el = Element::find($db_array[$sf_key]["id"]);
             $el->type_id = $types[$value["type"]];
-            $el->desc = $value["desc"];
+            // $el->desc = $value["desc"];
             $el->in_use = 1;
             $el->save();
         } else {
@@ -143,6 +131,7 @@ function sync_db($tags, $templateObject, $objectType, $cleanup) {
             $el = new Element();
             $el->type = $types[$value["type"]];
             $el->desc = $value["desc"];
+            $el->content = $value["default"];
             switch($objectType) {
                 case 'page':
                     $el->page_id = $sfpage->id;
@@ -151,7 +140,7 @@ function sync_db($tags, $templateObject, $objectType, $cleanup) {
                     $el->layout_id = $sfpage->id;
                 break;
             }
-            $el->cms_key = $cms_key;
+            $el->cms_key = $sf_key;
             $el->save();
         }
 
