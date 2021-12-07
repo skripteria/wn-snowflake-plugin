@@ -20,7 +20,8 @@ function parse_snowflake($templateObject, $objectType, $cleanup = false) {
 
     foreach($matches[1] as $k=>$v) {
         $param_string = $matches[2][$k];
-        $param_string = str_replace(['\'','\"',' '], '', $param_string);
+        $param_string = str_replace(['\'','\"'], '', $param_string);
+        $param_string = trim($param_string, ' ');
         $params = explode(',', $param_string);
 
         $sf_key = $v;
