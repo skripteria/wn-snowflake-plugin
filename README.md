@@ -38,7 +38,7 @@ On these CMS page you now can add some content variables using the 'sf' Twig Fil
 
 ```html
 
-<h1>{{ my_headline | sf('text', 'This is the main headline of this page.') }}</h1>
+<h1>{{ my_headline | sf('text', 'My awsome headline', 'Main headline of this page.') }}</h1>
 ```
 The first part ('my_headline') is the Snowflake Key that will be used to render the content. The Snowflake Key is just like a normal Twig variable as a reference to the content.
 
@@ -46,10 +46,11 @@ Every Snowflake Key must be unique within a given Page but may conflict the keys
 When adding Snowflake Keys to a Layout name collisions with Pages can happen, therefore it is recommended generally prefix Snowflake Keys in layouts (e.g. 'layout_my_headline').
 
 
-The 'sn' filter then takes 2 parameters:
+The 'sn' filter then takes up to 3 parameters:
 
 - Parameter 1 defines the type of the content. This controls what backend widget is used for content management.
-- Parameter 2 is optional and allows to add a description for the user who is responsible for content management.
+- Parameter 2 (optional) allows to set a default value for the content. The default value does not work for images and files.
+- Parameter 3 (optional) allows to add a description for the user who is responsible for content management.
 
     Currently Snowflake supports 7 standard types and 2 special ones.
 

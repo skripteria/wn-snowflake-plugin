@@ -58,10 +58,10 @@ class Elements extends Controller
 
         switch($form->model->attributes["type_id"]) {
             case 1:
-                $form->fields = $form->fields + ['content' => ['type' => 'text', 'label' => 'Content', 'span' => 'left']];
+                $form->fields = $form->fields + ['content' => ['type' => 'text', 'label' => 'Content', 'span' => 'full']];
             break;
             case 2:
-                $form->fields = $form->fields + ['content' => ['type' => 'text', 'label' => 'Link', 'span' => 'left']];
+                $form->fields = $form->fields + ['content' => ['type' => 'text', 'label' => 'Link', 'span' => 'full']];
             break;
             case 3:
                 $form->fields = $form->fields + ['image' => ['type' => 'fileupload', 'label' => 'image','mode' => 'image', 'span' => 'left']];

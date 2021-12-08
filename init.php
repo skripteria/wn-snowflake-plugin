@@ -15,11 +15,13 @@ function log($message) {
 function parse_snowflake($templateObject, $objectType, $cleanup = false) {
     $content = $templateObject->markup;
 
-    preg_match_all('|\{{2}\s*(\w+)\s*\|\s*sf\((.*)\)\s*\}{2}|', $content, $matches);
+    preg_match_all('|\{{2}.*\s*(\w+)\s*\|.*sf\((.*)\).*\}{2}|U', $content, $matches);
     $tags = [];
 
     foreach($matches[1] as $k=>$v) {
-        $param_string = $matches[2][$k];
+        $param_string = explode('|',$matches[2][$k])[0];
+        log ($param_string);
+        log($v);
         $param_string = str_replace(['\'','\"'], '', $param_string);
         $param_string = trim($param_string, ' ');
         $params = explode(',', $param_string);
@@ -39,11 +41,11 @@ function parse_snowflake($templateObject, $objectType, $cleanup = false) {
                     $tags[$sf_key]['type'] = $param;
                     break;
                 case 1:
+                    if ($tags[$sf_key]['type'] != 'image' && $tags[$sf_key]['type'] != 'file')
+                    $tags[$sf_key]['default'] = $param;
+                case 2:
                     $tags[$sf_key]['desc'] = $param;
                     break;
-                case 2:
-                   if ($tags[$sf_key]['type'] != 'image' && $tags[$sf_key]['type'] != 'file')
-                    $tags[$sf_key]['default'] = $param;
                 break;
             }
         }
