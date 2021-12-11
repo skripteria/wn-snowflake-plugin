@@ -4,6 +4,7 @@
     "description": "Snowflake plugin is dynamic content manager for Winter CMS",
     "homepage": "https://github.com/skripteria/wn-snowflake-plugin",
     "keywords": ["wintercms", "snowflake", "plugin", "cms"],
+    "license": "MIT",
     "authors": [
         {
             "name": "skripteria",

@@ -1,4 +1,6 @@
-<?php namespace Skripteria\Snowflake\Models;
+<?php
+
+namespace Skripteria\Snowflake\Models;
 
 use Model;
 
@@ -54,7 +56,7 @@ class Type extends Model
      */
     protected $dates = [
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
