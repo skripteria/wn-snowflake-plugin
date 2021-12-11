@@ -15,6 +15,3 @@ columns:
         label: Description
         type: text
         searchable: true
-
-
-
