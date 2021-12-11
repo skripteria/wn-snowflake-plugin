@@ -25,16 +25,13 @@ function parse_snowflake($templateObject, $objectType, $cleanup = false)
     foreach ($matches[1] as $k => $v) {
         $param_string = explode('|', $matches[2][$k])[0];
 
-        log($param_string);
-        log($v);
-
         $param_string = str_replace(['\'', '\"'], '', $param_string);
         $param_string = trim($param_string, ' ');
         $params = explode(',', $param_string);
 
         $sf_key = $v;
 
-        // Skip if Sf Key ends with _alt or _name
+        // Skip if Sf Key ends with __alt or __name
         if (substr($sf_key, -5) === '__alt' || substr($sf_key, -6) === '__name') {
             continue;
         }
@@ -55,10 +52,10 @@ function parse_snowflake($templateObject, $objectType, $cleanup = false)
                     if ($tags[$sf_key]['type'] !== 'image' && $tags[$sf_key]['type'] !== 'file') {
                         $tags[$sf_key]['default'] = $param;
                     }
-                case 2:
-                    $tags[$sf_key]['desc'] = $param;
 
                     break;
+                case 2:
+                    $tags[$sf_key]['desc'] = $param;
 
                     break;
             }
@@ -149,7 +146,6 @@ function sync_db($tags, $templateObject, $objectType, $cleanup)
             // Update
             $el = Element::find($db_array[$sf_key]['id']);
             $el->type_id = $types[$value['type']];
-            // $el->desc = $value['desc'];
             $el->in_use = 1;
             $el->order = $order;
             $el->save();

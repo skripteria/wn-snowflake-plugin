@@ -15,5 +15,10 @@ columns:
         label: Description
         type: text
         searchable: true
+    content:
+        label: Content
+        type: partial
+        path: $/skripteria/snowflake/models/element/_content.htm
+        searchable: true
     order:
         label: Position
