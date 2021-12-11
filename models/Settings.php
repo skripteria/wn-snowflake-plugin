@@ -1,4 +1,6 @@
-<?php namespace Skripteria\Snowflake\Models;
+<?php
+
+namespace Skripteria\Snowflake\Models;
 
 use Model;
 

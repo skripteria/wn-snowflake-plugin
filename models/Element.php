@@ -1,7 +1,9 @@
-<?php namespace Skripteria\Snowflake\Models;
+<?php
+
+namespace Skripteria\Snowflake\Models;
 
 use Model;
-use Skripteria\Snowflake\Models\Settings;
+use Skripteria\Snowflake\Classes\EnumFieldType;
 
 class Element extends Model
 {
@@ -20,7 +22,7 @@ class Element extends Model
 
     protected $dates = [
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     protected $rules = [];
@@ -37,19 +39,23 @@ class Element extends Model
     ];
 
 
-    public function scopeWithPage($query, $filtered) {
-        return $query->whereHas('page', function($q) use ($filtered) {
-            $q->where('id', $filtered);
-        });
-    }
-    public function scopeWithLayout($query, $filtered) {
-        return $query->whereHas('layout', function($q) use ($filtered) {
+    public function scopeWithPage($query, $filtered)
+    {
+        return $query->whereHas('page', function ($q) use ($filtered) {
             $q->where('id', $filtered);
         });
     }
 
-    public function beforeSave() {
-        if ($this->type_id == 2) {
+    public function scopeWithLayout($query, $filtered)
+    {
+        return $query->whereHas('layout', function ($q) use ($filtered) {
+            $q->where('id', $filtered);
+        });
+    }
+
+    public function beforeSave()
+    {
+        if ($this->type_id == EnumFieldType::Link) {
             $baseurl = rtrim(url('/'), '/');
             $this->content = str_replace($baseurl, '', $this->content);
         }
