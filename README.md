@@ -108,9 +108,9 @@ The 3 special cases are:
     This is done like this:
 
     ```html
-    <img src="{{ my_image | sf('image','This is the hero image on this page')}}" alt='{{ my_image_alt }}'>
+    <img src="{{ my_image | sf('image','This is the hero image on this page')}}" alt='{{ my_image___alt }}'>
     ```
-    Please note that the `'sf'` filter is only added once in the `src` attribute, the `alt` attribute then just uses the same key with the suffix `'_alt'`.
+    Please note that the `'sf'` filter is only added once in the `src` attribute, the `alt` attribute then just uses the same key with the suffix `'__alt'`.
 
 - `file`:
 
@@ -119,7 +119,7 @@ The 3 special cases are:
     Similar to images this is how its done:
 
     ```html
-    <a href="{{ my_file | sf('file', 'This is my uploaded file')}}">{{ my_file_name }}</a>
+    <a href="{{ my_file | sf('file', 'This is my uploaded file')}}">{{ my_file__name }}</a>
     ```
 
 - `link`:
