@@ -3,7 +3,6 @@
 # ===================================
 
 fields:
-
     content_markdown:
         type: markdown
         hidden: true
@@ -16,7 +15,6 @@ fields:
         hidden: true
     content:
         type: text
-
     type:
         label: Type
         type: relation
