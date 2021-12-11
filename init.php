@@ -29,7 +29,7 @@ function parse_snowflake($templateObject, $objectType, $cleanup = false) {
         $sf_key = $v;
 
         // Skip if Sf Key ends with _alt or _name
-        if (substr($sf_key, -4) == "_alt" || substr($sf_key, -5) == "_name") continue;
+        if (substr($sf_key, -5) == "__alt" || substr($sf_key, -6) == "__name") continue;
 
         if (count($params) == 0 || strlen($sf_key) == 0) {
             throw new ApplicationException("Snowflake: invalid tag: {{ $sf_key }} (on page: ".$templateObject->getFilename().")");
@@ -107,10 +107,13 @@ function sync_db($tags, $templateObject, $objectType, $cleanup) {
                 $el->delete();
             } else {
                 $el->in_use = 0;
+                $el->order = 9999;
                 $el->save();
             }
         }
     }
+
+    $order = 1;
 
     foreach ($tags as $sf_key=>$value) {
         if (! isset($types[$value['type']])) {
@@ -128,11 +131,13 @@ function sync_db($tags, $templateObject, $objectType, $cleanup) {
             $el->type_id = $types[$value["type"]];
             // $el->desc = $value["desc"];
             $el->in_use = 1;
+            $el->order = $order;
             $el->save();
         } else {
             //Insert
             $el = new Element();
             $el->type = $types[$value["type"]];
+            $el->order = $order;
             $el->desc = $value["desc"];
             $el->content = $value["default"];
             switch($objectType) {
@@ -146,6 +151,7 @@ function sync_db($tags, $templateObject, $objectType, $cleanup) {
             $el->cms_key = $sf_key;
             $el->save();
         }
+        $order++;
 
     }
 }

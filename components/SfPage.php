@@ -61,7 +61,7 @@ class SfPage extends ComponentBase
                     }
 
                     $this->page[$element->cms_key] = $path;
-                    $this->page[$element->cms_key.'_alt'] = $element->alt;
+                    $this->page[$element->cms_key.'__alt'] = $element->alt;
                 break;
 
                 case 5:
@@ -75,7 +75,7 @@ class SfPage extends ComponentBase
                         $path = '';
                     }
                     $this->page[$element->cms_key] = $path;
-                    $this->page[$element->cms_key.'_name'] = $element->filename;
+                    $this->page[$element->cms_key.'__name'] = $element->filename;
                 break;
 
                 default:
