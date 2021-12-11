@@ -1,0 +1,25 @@
+{
+    "name": "skripteria/wn-snowflake-plugin",
+    "type": "winter-plugin",
+    "description": "Snowflake plugin is dynamic content manager for Winter CMS",
+    "homepage": "https://github.com/skripteria/wn-snowflake-plugin",
+    "keywords": ["wintercms", "snowflake", "plugin", "cms"],
+    "authors": [
+        {
+            "name": "skripteria",
+            "homepage": "https://github.com/skripteria",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/skripteria/wn-snowflake-plugin/issues",
+        "source": "https://github.com/skripteria/wn-snowflake-plugin"
+    },
+    "require": {
+        "php": ">=7.0",
+        "composer/installers": "~1.0"
+    },
+    "extra": {
+        "installer-name": "snowflake"
+    }
+}

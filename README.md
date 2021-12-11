@@ -34,6 +34,21 @@ As an alternative solution (if you are using default Winter installation with de
 git clone https://github.com/skripteria/wn-snowflake-plugin.git ./plugins/skripteria/snowflake && php artisan winter:up
 ```
 
+### Updating existing installation
+
+If you have previously installed Snowflake plugin with GitHub installation method described above and want to update plugin with the latest changes then you can execute the following commands from the Winter project root:
+
+```sh
+cd ./plugins/skripteria/snowflake
+git pull origin main
+```
+
+It is also recommended to execute `winter:up` commmand after the previous steps to apply any new database migrations introduced with the latest changes:
+
+```sh
+php artisan winter:up
+```
+
 ## Why a new "CMS" within a CMS at all?
 
 In real life there are at least 4 different user types that all need to be taken care of the same time:
