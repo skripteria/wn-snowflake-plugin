@@ -2,8 +2,8 @@
 
 namespace Skripteria\Snowflake\Models;
 
-use Model;
 use Skripteria\Snowflake\Classes\EnumFieldType;
+use Winter\Storm\Database\Model;
 
 class Element extends Model
 {

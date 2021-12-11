@@ -1,11 +1,13 @@
-<?php namespace Skripteria\Snowflake\Console;
+<?php
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Skripteria\Snowflake\Models\Settings;
-use Cms\Classes\Page;
+namespace Skripteria\Snowflake\Console;
+
 use Cms\Classes\Layout;
+use Cms\Classes\Page;
 use Cms\Classes\Theme;
+use Illuminate\Console\Command;
+use Skripteria\Snowflake\Classes\SnowflakeParser;
+use Symfony\Component\Console\Input\InputOption;
 
 class SyncCommand extends Command
 {
@@ -15,9 +17,8 @@ class SyncCommand extends Command
 
     public function handle()
     {
-
         if ($this->option('cleanup')) {
-            $this->output->writeln('Cleaning up unused cms_keys...');
+            $this->output->writeln('Cleaning up unused Snowflake Keys...');
         }
 
         $this->syncPages();
@@ -27,22 +28,24 @@ class SyncCommand extends Command
     protected function getOptions()
     {
         return [
-            ['cleanup', 'null', InputOption::VALUE_NONE, 'Cleanup unused cms_keys.', null],
+            ['cleanup', 'null', InputOption::VALUE_NONE, 'Clean-up unused Snowflake Keys.', null],
         ];
     }
 
-    protected function syncPages() {
+    protected function syncPages()
+    {
         $active_theme = Theme::getActiveTheme();
 
         foreach (Page::listInTheme($active_theme) as $page) {
             $this->output->writeln('Syncing Snowflake Page: ' . $page->getFileName());
-            \Skripteria\Snowflake\parse_snowflake($page,'page', $this->option('cleanup'));
+
+            SnowflakeParser::parseSnowflake($page, 'page', $this->option('cleanup'));
         }
 
         foreach (Layout::listInTheme($active_theme) as $layout) {
             $this->output->writeln('Syncing Snowflake Layout: ' . $layout->getFileName());
-            \Skripteria\Snowflake\parse_snowflake($layout,'layout', $this->option('cleanup'));
+
+            SnowflakeParser::parseSnowflake($layout, 'layout', $this->option('cleanup'));
         }
     }
-
 }

@@ -1,21 +1,27 @@
-<?php namespace Skripteria\Snowflake;
+<?php
 
-use Backend;
-use System\Classes\PluginBase;
-use Event;
+namespace Skripteria\Snowflake;
+
+use Backend\Facades\Backend;
+use Skripteria\Snowflake\Classes\SnowflakeParser;
 use Skripteria\Snowflake\Models\Settings;
+use System\Classes\PluginBase;
+use Winter\Storm\Support\Facades\Event;
+
 class Plugin extends PluginBase
 {
     public function register()
     {
-
-        Event::listen('backend.page.beforeDisplay', function($controller, $action, $params) {
+        Event::listen('backend.page.beforeDisplay', function ($controller, $action, $params) {
             $controller->addCss('/plugins/skripteria/snowflake/assets/css/icons.css');
         });
 
-        Event::listen('cms.template.save', function ( $controller, $templateObject, $type) {
-            if ($type != 'page' && $type != 'layout') return;
-            parse_snowflake($templateObject, $type);
+        Event::listen('cms.template.save', function ($controller, $templateObject, $type) {
+            if ($type !== 'page' && $type !== 'layout') {
+                return;
+            }
+
+            SnowflakeParser::parseSnowflake($templateObject, $type);
         });
 
         $this->registerConsoleCommand('snowflake.sync', 'Skripteria\Snowflake\Console\SyncCommand');
@@ -25,7 +31,6 @@ class Plugin extends PluginBase
     {
         return [
             'Skripteria\Snowflake\Components\SfPage' => 'sf_page',
-            // 'Skripteria\Snowflake\Components\BlueprintPage' => 'blueprint_page',
         ];
     }
 
@@ -45,7 +50,7 @@ class Plugin extends PluginBase
 
     public function registerNavigation()
     {
-        if (! $label = Settings::get('custom_name')) $label = "Snowflake";
+        if (!$label = Settings::get('custom_name')) $label = "Snowflake";
         return [
             'snowflake' => [
                 'label'       => $label,
@@ -71,7 +76,8 @@ class Plugin extends PluginBase
         ];
     }
 
-    public function registerSettings() {
+    public function registerSettings()
+    {
 
         return [
             'snowflake' => [
@@ -91,11 +97,11 @@ class Plugin extends PluginBase
     {
         return [
             'filters' => [
-                'sf' => function ($cms_key){
+                'sf' => function ($cms_key) {
                     return $cms_key;
                 },
-                ]
-            ];
+            ]
+        ];
     }
 
     public function pluginDetails()
@@ -107,5 +113,4 @@ class Plugin extends PluginBase
             'icon'        => 'icon-snowflake'
         ];
     }
-
 }
