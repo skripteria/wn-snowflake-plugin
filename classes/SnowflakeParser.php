@@ -39,23 +39,19 @@ class SnowflakeParser
 
             $tags[$sf_key] = ['type' => '', 'desc' => '', 'default' => ''];
 
-            foreach ($params as $i => $param) {
-                switch ($i) {
-                    case 0:
-                        $tags[$sf_key]['type'] = $param;
+            // Process each argument passsed to sf filter
+            if (isset($params[0])) {
+                $tags[$sf_key]['type'] = $params[0];
+            }
 
-                        break;
-                    case 1:
-                        if ($tags[$sf_key]['type'] !== 'image' && $tags[$sf_key]['type'] !== 'file') {
-                            $tags[$sf_key]['default'] = $param;
-                        }
-
-                        break;
-                    case 2:
-                        $tags[$sf_key]['desc'] = $param;
-
-                        break;
+            if (isset($params[1])) {
+                if ($tags[$sf_key]['type'] !== 'image' && $tags[$sf_key]['type'] !== 'file') {
+                    $tags[$sf_key]['default'] = $params[1];
                 }
+            }
+
+            if (isset($params[2])) {
+                $tags[$sf_key]['desc'] = $params[2];
             }
         }
 
