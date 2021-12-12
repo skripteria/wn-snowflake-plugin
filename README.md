@@ -1,54 +1,14 @@
 # Snowflake for Winter CMS
+Version history:
 
-This is the beta version of the "Snowflake Plugin" for Winter CMS.
-
-## Installation from GitHub repo
-
-- Inside the plugin folder (`./plugins`) of your Winter installation create a new `skripteria/snowflake` folder structure:
+- 1.0.1. initial release
+## Installation with Composer
 
 ```sh
-mkdir -p skripteria/snowflake
-```
+composer require skripteria/wn-snowflake-plugin
 
-- Change directory to the newly created folder:
-
-```sh
-cd skripteria/snowflake
-```
-
-- Run:
-
-```sh
-git clone https://github.com/skripteria/wn-snowflake-plugin.git .
-```
-
-- From the Winter project root run:
-
-```sh
 php artisan winter:up
 ```
-
-As an alternative solution (if you are using default Winter installation with default `./plugins`) you can use the following one liner from the Winter project root:
-
-```sh
-git clone https://github.com/skripteria/wn-snowflake-plugin.git ./plugins/skripteria/snowflake && php artisan winter:up
-```
-
-### Updating existing installation
-
-If you have previously installed Snowflake plugin with GitHub installation method described above and want to update plugin with the latest changes then you can execute the following commands from the Winter project root:
-
-```sh
-cd ./plugins/skripteria/snowflake
-git pull origin main
-```
-
-It is also recommended to execute `winter:up` commmand after the previous steps to apply any new database migrations introduced with the latest changes:
-
-```sh
-php artisan winter:up
-```
-
 ## Why a new "CMS" within a CMS at all?
 
 In real life there are at least 4 different user types that all need to be taken care of the same time:
