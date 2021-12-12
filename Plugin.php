@@ -12,10 +12,6 @@ class Plugin extends PluginBase
 {
     public function register()
     {
-        Event::listen('backend.page.beforeDisplay', function ($controller, $action, $params) {
-            $controller->addCss('/plugins/skripteria/snowflake/assets/css/icons.css');
-        });
-
         Event::listen('cms.template.save', function ($controller, $templateObject, $type) {
             if ($type !== 'page' && $type !== 'layout') {
                 return;
@@ -84,7 +80,7 @@ class Plugin extends PluginBase
                 'label' => 'Snowflake',
                 'description' => 'skripteria.snowflake::lang.plugin.manage_settings',
                 'category' => 'system::lang.system.categories.cms',
-                'icon'     => 'icon-snowflake',
+                'icon'     => 'icon-snowflake-o',
                 'class' => 'Skripteria\Snowflake\Models\Settings',
                 'order' => 500,
                 'keywords' => 'snowflake',
@@ -110,7 +106,7 @@ class Plugin extends PluginBase
             'name'        => 'Snowflake',
             'description' => 'skripteria.snowflake::lang.plugin.desc',
             'author'      => 'Skripteria',
-            'icon'        => 'icon-snowflake'
+            'icon'        => 'icon-snowflake-o'
         ];
     }
 }

@@ -16,7 +16,7 @@ class SfPage extends ComponentBase
         return [
             'name'        => 'Snowflake',
             'description' => 'skripteria.snowflake::lang.components.sf_page_desc',
-            'icon' => 'icon-snowflake'
+            'icon' => 'icon-snowflake-o'
         ];
     }
 
