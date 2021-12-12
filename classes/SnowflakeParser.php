@@ -45,7 +45,7 @@ class SnowflakeParser
             }
 
             if (isset($params[1])) {
-                if ($tags[$sf_key]['type'] !== 'image' && $tags[$sf_key]['type'] !== 'file') {
+                if ($tags[$sf_key]['type'] !== 'image' && $tags[$sf_key]['type'] !== 'file' && $tags[$sf_key]['type'] !== 'date') {
                     $tags[$sf_key]['default'] = $params[1];
                 }
             }
