@@ -2,7 +2,7 @@
 
 namespace Skripteria\Snowflake\Models;
 
-use Model;
+use Winter\Storm\Database\Model;
 
 /**
  * Settings Model
