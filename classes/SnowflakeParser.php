@@ -8,6 +8,7 @@ use Skripteria\Snowflake\Models\Element;
 use Skripteria\Snowflake\Models\Layout;
 use Skripteria\Snowflake\Models\Page;
 use Winter\Storm\Exception\ApplicationException;
+use Winter\Storm\Support\Facades\Str;
 
 class SnowflakeParser
 {
@@ -18,6 +19,7 @@ class SnowflakeParser
         preg_match_all('|\{{2}.*\s*(\w+)\s*\|.*sf\((.*)\).*\}{2}|U', $content, $matches);
 
         $tags = [];
+        $sf_alt_keys = ['__alt', '__name'];
 
         foreach ($matches[1] as $k => $v) {
             $param_string = explode('|', $matches[2][$k])[0];
@@ -29,7 +31,7 @@ class SnowflakeParser
             $sf_key = $v;
 
             // Skip if Sf Key ends with __alt or __name
-            if (substr($sf_key, -5) === '__alt' || substr($sf_key, -6) === '__name') {
+            if (Str::endsWith($sf_key, $sf_alt_keys)) {
                 continue;
             }
 
