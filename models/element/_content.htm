@@ -1,9 +1,45 @@
 <?php
 
-if (strlen($value) > 50) {
-    echo substr($value, 0, 50) . '  (...)';
-} else {
-    echo $value;
+use \Skripteria\Snowflake\Classes\EnumFieldType;
+
+switch ($record->attributes['type_id']) {
+
+    case EnumFieldType::Image :
+        if (! $record->image) {
+            echo "- no image uploaded -";
+            break;
+        } else {
+            $src = $record->image->getThumb(100,100);
+            echo "<img src='$src' alt='' />";
+        }
+    break;
+
+    case EnumFieldType::File :
+        if (! $record->file) {
+            echo "- no file uploaded -";
+        } else {
+            echo $record->file->getFilename();
+        }
+    break;
+
+    case EnumFieldType::Color :
+        if (empty($value)) {
+            echo "- no color defined -";
+        } else
+        {
+            $color = $value;
+            echo "<div style='width:20px;height:20px;background-color:$color;'> </div>";
+        }
+    break;
+
+    default:
+        if (strlen($value) > 50) {
+            echo substr($value, 0, 50) . '  ( ...)';
+        } else {
+            echo $value;
+        }
+    break;
+
 }
 
 ?>
