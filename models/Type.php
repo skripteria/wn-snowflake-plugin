@@ -29,7 +29,9 @@ class Type extends Model
     /**
      * @var array Validation rules for attributes
      */
-    public $rules = [];
+    public $rules = [
+        'name' => 'required|unique',
+    ];
 
     /**
      * @var array Attributes to be cast to native types
