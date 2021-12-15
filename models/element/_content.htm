@@ -33,6 +33,10 @@ switch ($record->attributes['type_id']) {
     break;
 
     default:
+        if (empty($value)) {
+            echo "- no content yet -";
+            break;
+        }
         if (strlen($value) > 50) {
             echo substr($value, 0, 50) . '  ( ...)';
         } else {
