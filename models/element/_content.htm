@@ -1,7 +1,8 @@
 <?php
 
 use \Skripteria\Snowflake\Classes\EnumFieldType;
-
+use \System\Classes\MediaLibrary;
+use System\Classes\ImageResizer;
 switch ($record->attributes['type_id']) {
 
     case EnumFieldType::Image :
@@ -29,6 +30,17 @@ switch ($record->attributes['type_id']) {
         {
             $color = $value;
             echo "<div style='width:20px;height:20px;background-color:$color;'> </div>";
+        }
+    break;
+    case EnumFieldType::MediaImage :
+        if (empty($value)) {
+            echo "- no media image selected -";
+        } else {
+            $media_image_path = media_path($value);
+            $resizer = new ImageResizer($media_image_path);
+            $thumb_path = $resizer->resize(100,100);
+            debug($thumb_path);
+            // echo "<img src='$src' style='width:100px' alt='' />";
         }
     break;
 

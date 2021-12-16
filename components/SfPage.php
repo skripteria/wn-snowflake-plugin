@@ -85,6 +85,11 @@ class SfPage extends ComponentBase
                     $this->page[$element->cms_key . '__name'] = $element->filename;
 
                     break;
+                case EnumFieldType::MediaImage:
+                    $path = media_path($element->content);
+                    $this->page[$element->cms_key] = $path;
+                    $this->page[$element->cms_key . '__alt'] = $element->alt;
+                    break;
                 default:
                     $this->page[$element->cms_key] = $element->content;
             }

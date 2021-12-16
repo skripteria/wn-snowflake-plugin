@@ -8,4 +8,6 @@
 "1.0.2":
     - Improved content preview
 "1.0.3":
+    - added support for mediaimage and mediafile
     - unique_type_constrain.php
+    - add_media_types.php

@@ -14,4 +14,6 @@ abstract class EnumFieldType
     const Date = 8;
     const Textarea = 9;
     const File = 10;
+    const MediaImage = 11;
+    const MediaFile = 12;
 }

@@ -73,6 +73,7 @@ class Elements extends Controller
                 $form->fields = $form->fields + ['image' => ['type' => 'fileupload', 'label' => 'image', 'mode' => 'image', 'span' => 'left']];
                 $form->fields = $form->fields + ['alt' => ['type' => 'text', 'label' => 'Alt Attribute', 'span' => 'left']];
 
+
                 break;
             case EnumFieldType::Color:
                 $form->fields = $form->fields + ['content' => ['type' => 'colorpicker', 'span' => 'left', 'label' => 'Color']];
@@ -103,6 +104,15 @@ class Elements extends Controller
                 $form->fields = $form->fields + ['filename' => ['type' => 'text', 'label' => 'Filename', 'span' => 'left']];
 
                 break;
+            case EnumFieldType::MediaImage:
+                $form->fields = $form->fields + ['content' => ['type' => 'mediafinder', 'label' => 'Image (Media)', 'mode' => 'image', 'span' => 'left']];
+                $form->fields = $form->fields + ['alt' => ['type' => 'text', 'label' => 'Alt Attribute', 'span' => 'left']];
+                break;
+            // case EnumFieldType::MediaFile:
+            //     $form->fields = $form->fields + ['file' => ['type' => 'fileupload', 'label' => 'file', 'mode' => 'file', 'span' => 'left']];
+            //     $form->fields = $form->fields + ['filename' => ['type' => 'text', 'label' => 'Filename', 'span' => 'left']];
+
+            //     break;
         }
     }
 }
