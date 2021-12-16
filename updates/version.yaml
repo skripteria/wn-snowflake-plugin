@@ -1,7 +1,11 @@
-1.0.1:
+"1.0.1":
     - First version of Snowflake
     - create_elements_table.php
     - create_pages_table.php
     - create_layouts_table.php
     - create_types_table.php
     - seed_types.php
+"1.0.2":
+    - Improved content preview
+"1.0.3":
+    - unique_type_constrain.php
