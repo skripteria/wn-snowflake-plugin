@@ -70,7 +70,7 @@ class Elements extends Controller
 
                 break;
             case EnumFieldType::Image:
-                $form->fields = $form->fields + ['image' => ['type' => 'fileupload', 'label' => 'image', 'mode' => 'image', 'span' => 'left']];
+                $form->fields = $form->fields + ['image' => ['type' => 'fileupload', 'label' => 'image', 'mode' => 'image', 'span' => 'left', 'useCaption' => false]];
                 $form->fields = $form->fields + ['alt' => ['type' => 'text', 'label' => 'Alt Attribute', 'span' => 'left']];
 
 

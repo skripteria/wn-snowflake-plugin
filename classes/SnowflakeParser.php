@@ -48,9 +48,9 @@ class SnowflakeParser
 
             if (isset($params[1])) {
 
-                $no_default = ['image','file','date','mediaimage','mediafile'];
+                $ignore_default = ['image','file','date','mediaimage','mediafile'];
 
-                if (!  in_array($tags[$sf_key]['type'], $no_default)) {
+                if (!  in_array($tags[$sf_key]['type'], $ignore_default)) {
                     $tags[$sf_key]['default'] = $params[1];
                 }
             }

@@ -46,7 +46,7 @@ switch ($record->attributes['type_id']) {
         if (empty($value)) {
             echo "- no media file selected -";
         } else {
-            echo $value;
+            echo basename($value);
         }
     break;
 
