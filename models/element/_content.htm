@@ -1,7 +1,6 @@
 <?php
 
 use \Skripteria\Snowflake\Classes\EnumFieldType;
-use \System\Classes\MediaLibrary;
 use System\Classes\ImageResizer;
 switch ($record->attributes['type_id']) {
 
@@ -36,11 +35,21 @@ switch ($record->attributes['type_id']) {
         if (empty($value)) {
             echo "- no media image selected -";
         } else {
-            $media_image_path = media_path($value);
-            $resizer = new ImageResizer($media_image_path);
-            $thumb_path = $resizer->resize(100,100);
-            debug($thumb_path);
-            // echo "<img src='$src' style='width:100px' alt='' />";
+            $path = media_path($value);
+            $thumb_path = ImageResizer::filterGetUrl($path,100,100);
+            // $resizer = new ImageResizer($path);
+            // $resizer->resize(100,100);
+            // $thumb_path = $resizer->getResizedUrl();
+        
+            echo "<img src='$thumb_path' alt='' />";
+        }
+    break;
+
+    case EnumFieldType::MediaFile :
+        if (empty($value)) {
+            echo "- no media file selected -";
+        } else {
+            echo $value;
         }
     break;
 

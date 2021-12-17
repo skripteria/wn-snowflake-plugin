@@ -102,6 +102,17 @@ class ElementsLayouts extends Controller
                 $form->fields = $form->fields + ['filename' => ['type' => 'text', 'label' => 'Filename', 'span' => 'left']];
 
                 break;
+            case EnumFieldType::MediaImage:
+                $form->fields = $form->fields + ['content' => ['type' => 'mediafinder', 'label' => 'Image (Media Manager)', 'mode' => 'image', 'span' => 'left']];
+                $form->fields = $form->fields + ['alt' => ['type' => 'text', 'label' => 'Alt Attribute', 'span' => 'left']];
+
+                break;
+            case EnumFieldType::MediaFile:
+                $form->fields = $form->fields + ['content' => ['type' => 'mediafinder', 'label' => 'File (Media Manager)', 'mode' => 'file', 'span' => 'left']];
+                $form->fields = $form->fields + ['filename' => ['type' => 'text', 'label' => 'Filename', 'span' => 'left']];
+
+                break;
+
         }
     }
 }
