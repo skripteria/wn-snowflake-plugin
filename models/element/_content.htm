@@ -37,10 +37,7 @@ switch ($record->attributes['type_id']) {
         } else {
             $path = media_path($value);
             $thumb_path = ImageResizer::filterGetUrl($path,100,100);
-            // $resizer = new ImageResizer($path);
-            // $resizer->resize(100,100);
-            // $thumb_path = $resizer->getResizedUrl();
-        
+
             echo "<img src='$thumb_path' alt='' />";
         }
     break;

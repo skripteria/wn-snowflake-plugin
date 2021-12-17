@@ -43,10 +43,10 @@ Every Snowflake Key must be unique within a given Page but may conflict with the
 The `'sf'` filter then takes up to 3 parameters:
 
 - Parameter 1 defines the type of the content. This controls what backend widget is used for content management.
-- Parameter 2 *(optional)* allows to set a default value for the content. The default value does not work for images and files.
+- Parameter 2 *(optional)* allows to set a default value for the content. The default value has no effect on the types 'image', file', 'date', 'mediaimage' and 'mediafile'.
 - Parameter 3 *(optional)* allows to add a description for the user who is responsible for content management.
 
-Currently Snowflake supports 7 standard types and 3 special ones.
+Currently Snowflake supports 7 standard types and 5 special ones.
 
 The standard types are:
 
@@ -65,12 +65,21 @@ The 3 special cases are:
     To control images and will use the Winter CMS image upload widget.
     However, it uses 2 values for rendering, the image path and the img alt attribute. Therfore, the variable also needs to pass 2 values.
 
+
     This is done like this:
 
     ```html
-    <img src="{{ my_image | sf('image','This is the hero image on this page')}}" alt='{{ my_image___alt }}'>
+    <img src="{{ my_image | sf('image','','This is the hero image on this page')}}" alt='{{ my_image___alt }}'>
     ```
     Please note that the `'sf'` filter is only added once in the `src` attribute, the `alt` attribute then just uses the same key with the suffix `'__alt'`.
+
+- `mediaimage`:
+
+    Sames as 'image', but 'mediaimage' uses the Winter Media Library as the image source:
+
+    ```html
+    <img src="{{ my_image | sf('mediaimage','','This is the hero image on this page')}}" alt='{{ my_image___alt }}'>
+    ```
 
 - `file`:
 
@@ -79,7 +88,15 @@ The 3 special cases are:
     Similar to images this is how its done:
 
     ```html
-    <a href="{{ my_file | sf('file', 'This is my uploaded file')}}">{{ my_file__name }}</a>
+    <a href="{{ my_file | sf('file','','This is my uploaded file')}}">{{ my_file__name }}</a>
+    ```
+
+- `mediafile`:
+
+    Same as 'file', but 'mediafile' uses the Winter Media Library as the file source:
+
+    ```html
+    <a href="{{ my_file | sf('mediafile','',' 'This is my uploaded file')}}">{{ my_file__name }}</a>
     ```
 
 - `link`:
