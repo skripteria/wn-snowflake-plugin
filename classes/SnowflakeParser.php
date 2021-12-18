@@ -22,11 +22,13 @@ class SnowflakeParser
         $sf_alt_keys = ['__alt', '__name'];
 
         foreach ($matches[1] as $k => $v) {
-            $param_string = explode('|', $matches[2][$k])[0];
 
-            $param_string = str_replace(['\'', '\"'], '', $param_string);
-            $param_string = trim($param_string, ' ');
-            $params = explode(',', $param_string);
+            $param_string = $matches[2][$k] . ",";
+
+            $pattern = "|[\'\"]{1}(.*)[\'\"]{1}.*\,{1}|U";
+            preg_match_all($pattern, $param_string, $submatches);
+
+            $params = $submatches[1];
 
             $sf_key = $v;
 
