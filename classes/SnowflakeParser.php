@@ -16,20 +16,23 @@ class SnowflakeParser
     {
         $content = $templateObject->markup;
 
-        preg_match_all('|\{{2}.*\s*(\w+)\s*\|.*sf\((.*)\).*\}{2}|U', $content, $matches);
+        // Match all {{ sf_key | sf() }} with various space symbol combinations
+        preg_match_all('|\{{2}\s*(\w+)\s*\|\s*sf\((.*)\)\s*}{2}|U', $content, $matches);
 
         $tags = [];
         $sf_alt_keys = ['__alt', '__name'];
 
         foreach ($matches[1] as $k => $v) {
+            $param_string = $matches[2][$k];
+            $enclosure_char = '\'';
 
-            $param_string = $matches[2][$k] . ",";
+            // Check if double quote (") is used in sf filter for specifying parameter values instead of single quote (')
+            if (Str::startsWith($param_string, '"')) {
+                $enclosure_char = '"';
+            }
 
-            $pattern = "|[\'\"]{1}(.*)[\'\"]{1}.*\,{1}|U";
-            preg_match_all($pattern, $param_string, $submatches);
-
-            $params = $submatches[1];
-
+            // Process parameter string as CSV string
+            $params = str_getcsv($param_string, ',', $enclosure_char);
             $sf_key = $v;
 
             // Skip if Sf Key ends with __alt or __name
@@ -49,10 +52,9 @@ class SnowflakeParser
             }
 
             if (isset($params[1])) {
+                $ignore_default = ['image', 'file', 'date', 'mediaimage', 'mediafile'];
 
-                $ignore_default = ['image','file','date','mediaimage','mediafile'];
-
-                if (!  in_array($tags[$sf_key]['type'], $ignore_default)) {
+                if (!in_array($tags[$sf_key]['type'], $ignore_default)) {
                     $tags[$sf_key]['default'] = $params[1];
                 }
             }
