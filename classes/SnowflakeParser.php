@@ -17,7 +17,7 @@ class SnowflakeParser
         $content = $templateObject->markup;
 
         // Match all {{ sf_key | sf() }} with various space symbol combinations
-        preg_match_all('|\{{2}\s*(\w+)\s*\|\s*sf\((.*)\)\s*}{2}|U', $content, $matches);
+        preg_match_all('|\{{2}.*\s*(\w+)\s*\|.*sf\((.*)\).*\}{2}|U', $content, $matches);
 
         $tags = [];
         $sf_alt_keys = ['__alt', '__name'];
