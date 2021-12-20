@@ -23,7 +23,7 @@ class SnowflakeParser
         $sf_alt_keys = ['__alt', '__name'];
 
         foreach ($matches[1] as $k => $v) {
-            $param_string = $matches[2][$k];
+            $param_string = trim($matches[2][$k]);
             $enclosure_char = '\'';
 
             // Check if double quote (") is used in sf filter for specifying parameter values instead of single quote (')
@@ -33,7 +33,8 @@ class SnowflakeParser
 
             // Process parameter string as CSV string
             $params = str_getcsv($param_string, ',', $enclosure_char);
-            $sf_key = $v;
+
+            $sf_key = trim($v);
 
             // Skip if Sf Key ends with __alt or __name
             if (Str::endsWith($sf_key, $sf_alt_keys)) {
@@ -48,19 +49,19 @@ class SnowflakeParser
 
             // Process each argument passsed to sf filter
             if (isset($params[0])) {
-                $tags[$sf_key]['type'] = $params[0];
+                $tags[$sf_key]['type'] = trim($params[0]);
             }
 
             if (isset($params[1])) {
                 $ignore_default = ['image', 'file', 'date', 'mediaimage', 'mediafile'];
 
                 if (!in_array($tags[$sf_key]['type'], $ignore_default)) {
-                    $tags[$sf_key]['default'] = $params[1];
+                    $tags[$sf_key]['default'] = trim($params[1]);
                 }
             }
 
             if (isset($params[2])) {
-                $tags[$sf_key]['desc'] = $params[2];
+                $tags[$sf_key]['desc'] = trim($params[2]);
             }
         }
 
