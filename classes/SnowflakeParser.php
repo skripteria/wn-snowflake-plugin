@@ -16,7 +16,8 @@ class SnowflakeParser
     {
         $content = $templateObject->markup;
 
-        preg_match_all('|\{{2}.*\s*(\w+)\s*\|.*sf\((.*)\).*\}{2}|U', $content, $matches);
+        $pattern = "|\{{2}\s*(\w*)\s*.*sf\(([^\|]*)\).*\}{2}|";
+        preg_match_all($pattern, $content, $matches);
 
         $tags = [];
         $sf_alt_keys = ['__alt', '__name'];
@@ -25,9 +26,8 @@ class SnowflakeParser
 
             $param_string = $matches[2][$k] . ",";
 
-            $pattern = "|[\'\"]{1}(.*)[\'\"]{1}.*\,{1}|U";
+            $pattern = "|[\"\'](.[^,]*)[\'\"]|";
             preg_match_all($pattern, $param_string, $submatches);
-
             $params = $submatches[1];
 
             $sf_key = $v;
