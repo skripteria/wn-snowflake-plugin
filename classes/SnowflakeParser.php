@@ -26,13 +26,17 @@ class SnowflakeParser
 
             $param_string = $matches[2][$k] . ",";
 
+            // refactor empty arguments for correct parsing
+            $param_string = str_replace("''", "' '", $param_string);
+            $param_string = str_replace("\"\"", "\" \"", $param_string);
+
             $pattern = "|[\"\'](.[^,]*)[\'\"]|";
             preg_match_all($pattern, $param_string, $submatches);
             $params = $submatches[1];
 
             $sf_key = $v;
 
-            // Skip if Sf Key ends with __alt or __name
+            // skip if Sf Key ends with __alt or __name
             if (Str::endsWith($sf_key, $sf_alt_keys)) {
                 continue;
             }
@@ -61,7 +65,6 @@ class SnowflakeParser
                 $tags[$sf_key]['desc'] = $params[2];
             }
         }
-
         self::syncDb($tags, $templateObject, $objectType, $cleanup);
     }
 

@@ -11,3 +11,5 @@
     - Support for mediaimage and mediafile
     - unique_types_constraint.php
     - add_media_types.php
+"1.0.4":
+    - extended parsing support
