@@ -40,11 +40,14 @@ The first part (`'my_headline'`) is the Snowflake Key that will be used to rende
 
 Every Snowflake Key must be unique within a given Page but may conflict with the keys from other Pages. When adding Snowflake Keys to a Layout name collisions with Pages can happen, therefore it is recommended generally prefix Snowflake Keys in layouts (e.g. `'layout_my_headline'`).
 
-The `'sf'` filter then takes up to 3 parameters:
+The `'sf'` filter then takes up to 3 arguments:
 
-- Parameter 1 defines the type of the content. This controls what backend widget is used for content management.
-- Parameter 2 *(optional)* allows to set a default value for the content. The default value has no effect on the types 'image', file', 'date', 'mediaimage' and 'mediafile'.
-- Parameter 3 *(optional)* allows to add a description for the user who is responsible for content management.
+- Argument 1 defines the type of the content. This controls what backend widget is used for content management.
+- Argument 2 *(optional)* allows to set a default value for the content. The default value has no effect on the types 'image', file', 'date', 'mediaimage' and 'mediafile'.
+- Argument 3 *(optional)* allows to add a description for the user who is responsible for content management.
+
+*Please note that the characters ',' and '|' (comma and pipe) must not be used within arguments.*
+
 
 Currently Snowflake supports 7 standard types and 5 special ones.
 
