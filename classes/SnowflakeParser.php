@@ -8,7 +8,7 @@ use Skripteria\Snowflake\Models\Element;
 use Skripteria\Snowflake\Models\Layout;
 use Skripteria\Snowflake\Models\Page;
 use Winter\Storm\Exception\ApplicationException;
-use Winter\Storm\Support\Facades\Str;
+use Winter\Storm\Support\Str;
 
 class SnowflakeParser
 {
